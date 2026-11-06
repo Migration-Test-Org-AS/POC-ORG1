@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple todo list. Add a task, check it off, and make a little progress.">
+    <title>My todo list</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <main class="todo-app">
+      <header class="app-header">
+        <p class="eyebrow">ONE THING AT A TIME</p>
+        <h1>My todo list<span>.</span></h1>
+        <p class="intro">A little less on your mind. A little more done.</p>
+      </header>
+
+      <form id="task-form" novalidate>
+        <label for="task-input">What needs to get done?</label>
+        <div class="input-row">
+          <input id="task-input" name="task" type="text" autocomplete="off"
+            placeholder="Add your next task" aria-describedby="task-error">
+          <button class="add-button" type="submit">Add task</button>
+        </div>
+        <p id="task-error" class="error" role="alert" hidden></p>
+      </form>
+
+      <section class="tasks" aria-labelledby="tasks-heading">
+        <div class="list-heading">
+          <h2 id="tasks-heading">Your tasks</h2>
+          <p id="task-count" aria-live="polite" aria-atomic="true">0 tasks left</p>
+        </div>
+        <ul id="task-list" class="task-list" aria-label="Todo tasks"></ul>
+        <div id="empty-state" class="empty-state">
+          <span class="empty-icon" aria-hidden="true">+</span>
+          <p>Nothing on your list yet.</p>
+          <p class="empty-hint">Add a task above to get started.</p>
+        </div>
+      </section>
+
+      <footer>Small steps count.</footer>
+    </main>
+  </body>
+</html>
