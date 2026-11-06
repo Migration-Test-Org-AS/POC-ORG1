@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A browser-local demo with signup, login, and a personal todo list.">
+    <title>My todo list</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <main class="todo-app">
+      <header class="app-header">
+        <p class="eyebrow">ONE THING AT A TIME</p>
+        <h1>My todo list<span>.</span></h1>
+        <p class="intro">A little less on your mind. A little more done.</p>
+      </header>
+
+      <aside class="demo-notice" aria-label="Demo storage and security limitations">
+        <strong>Browser-local demo, not secure authentication.</strong>
+        <p>Accounts and tasks stay in this browser on this site. Anyone with access
+          to this browser can inspect or change them. Tasks are not encrypted.
+          Use a made-up password, never a real one. Clearing site data deletes
+          all demo accounts and tasks.</p>
+      </aside>
+      <p id="session-status" class="status" role="status"></p>
+      <p id="app-error" class="error" role="alert" hidden></p>
+
+      <section id="auth-panel" aria-labelledby="auth-title">
+        <div class="auth-modes" aria-label="Choose account action">
+          <button type="button" data-auth-mode="login" aria-pressed="true">Log in</button>
+          <button type="button" data-auth-mode="signup" aria-pressed="false">Sign up</button>
+        </div>
+        <h2 id="auth-title">Welcome back</h2>
+        <p id="auth-description" class="auth-description">Log in to your demo account to see your saved tasks.</p>
+        <form id="auth-form" novalidate>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username"
+            autocapitalize="none" spellcheck="false" minlength="3" maxlength="32"
+            aria-describedby="username-hint auth-error" required>
+          <p id="username-hint" class="field-hint">3-32 characters: letters, numbers, dots, underscores, or hyphens.</p>
+          <label for="password">Demo password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password"
+            minlength="8" maxlength="128" aria-describedby="password-hint auth-error" required>
+          <p id="password-hint" class="field-hint">8-128 characters. Make up a password just for this demo.</p>
+          <div id="confirmation-field" hidden>
+            <label for="confirm-password">Confirm demo password</label>
+            <input id="confirm-password" name="confirmation" type="password" autocomplete="new-password"
+              minlength="8" maxlength="128" aria-describedby="auth-error" disabled>
+          </div>
+          <p id="auth-error" class="error" role="alert" hidden></p>
+          <button id="auth-submit" class="add-button" type="submit">Log in</button>
+        </form>
+      </section>
+
+      <section id="todo-panel" aria-label="Your account and tasks" hidden>
+        <div class="account-bar">
+          <p>Signed in as <strong id="current-user"></strong></p>
+          <button id="logout" class="secondary-button" type="button">Log out</button>
+        </div>
+        <form id="task-form" novalidate>
+          <label for="task-input">What needs to get done?</label>
+          <div class="input-row">
+            <input id="task-input" name="task" type="text" autocomplete="off"
+              placeholder="Add your next task" aria-describedby="task-error">
+            <button class="add-button" type="submit">Add task</button>
+          </div>
+          <p id="task-error" class="error" role="alert" hidden></p>
+        </form>
+
+        <section class="tasks" aria-labelledby="tasks-heading">
+          <div class="list-heading">
+            <h2 id="tasks-heading">Your tasks</h2>
+            <p id="task-count" aria-live="polite" aria-atomic="true">0 tasks left</p>
+          </div>
+          <ul id="task-list" class="task-list" aria-label="Todo tasks"></ul>
+          <div id="empty-state" class="empty-state">
+            <span class="empty-icon" aria-hidden="true">+</span>
+            <p>Nothing on your list yet.</p>
+            <p class="empty-hint">Add a task above to get started.</p>
+          </div>
+        </section>
+      </section>
+
+      <footer>Small steps count. Demo accounts do not sync between browsers.</footer>
+    </main>
+  </body>
+</html>
