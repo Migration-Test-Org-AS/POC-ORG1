@@ -92,3 +92,34 @@ test("HTML-like task text is kept as literal text", () => {
   const text = '<img src="missing" onerror="alert(1)">';
   assert.equal(todos.add(text).text, text);
 });
+
+test("saved tasks are restored with their completion state and unique next ID", () => {
+  const saved = [
+    { id: 3, text: "Done", completed: true },
+    { id: 8, text: "Next", completed: false },
+  ];
+  const todos = createTodoList(saved);
+  assert.deepEqual(todos.getTasks(), saved);
+  saved[0].text = "External change";
+  assert.equal(todos.getTasks()[0].text, "Done");
+  assert.equal(todos.add("New").id, 9);
+});
+
+test("malformed saved tasks are rejected rather than silently reset", () => {
+  for (const saved of [
+    null, {}, [null], [{ id: 1, text: "Valid", completed: "false" }],
+    [{ id: 0, text: "Invalid ID", completed: false }],
+    [{ id: 1, text: " ", completed: false }],
+    [{ id: 1, text: " Untrimmed ", completed: false }],
+    [{ id: 1, text: "First", completed: false }, { id: 1, text: "Duplicate ID", completed: true }],
+  ]) {
+    assert.throws(() => createTodoList(saved), TypeError);
+  }
+});
+
+test("exhausted task IDs fail explicitly without mutating state", () => {
+  const saved = [{ id: Number.MAX_SAFE_INTEGER, text: "Last ID", completed: false }];
+  const todos = createTodoList(saved);
+  assert.throws(() => todos.add("Too many"), RangeError);
+  assert.deepEqual(todos.getTasks(), saved);
+});

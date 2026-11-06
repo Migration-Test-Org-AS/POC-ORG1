@@ -23,6 +23,7 @@ test("required app and repository files exist and have content", () => {
     "index.html",
     "styles.css",
     "app.js",
+    "auth.js",
     "todo.js",
     join(".github", "CODEOWNERS"),
     join(".github", "workflows", "blank.yml"),

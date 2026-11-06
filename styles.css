@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-width: 280px;
@@ -22,6 +26,12 @@ input {
 
 button {
   cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 button:focus-visible,
@@ -65,7 +75,7 @@ h1 span {
   line-height: 1.6;
 }
 
-form > label {
+form label {
   display: block;
   margin-bottom: 10px;
   font-size: 0.9rem;
@@ -77,7 +87,7 @@ form > label {
   gap: 10px;
 }
 
-#task-input {
+input:not([type="checkbox"]) {
   min-width: 0;
   width: 100%;
   padding: 14px 16px;
@@ -87,7 +97,7 @@ form > label {
   border-radius: 10px;
 }
 
-#task-input::placeholder {
+input::placeholder {
   color: #6f7b73;
 }
 
@@ -109,6 +119,83 @@ form > label {
   margin: 10px 0 0;
   color: #9c3429;
   font-size: 0.9rem;
+}
+
+.demo-notice {
+  margin-bottom: 20px;
+  padding: 16px;
+  color: #65472b;
+  background: #fcf1df;
+  border: 1px solid #e4cbaa;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.demo-notice p {
+  margin: 6px 0 0;
+}
+
+.status,
+.auth-description {
+  color: #5d6b63;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.status:empty {
+  display: none;
+}
+
+.auth-modes {
+  display: flex;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.auth-modes button,
+.secondary-button {
+  padding: 10px 16px;
+  color: #275a4c;
+  background: #fff;
+  border: 1px solid #b7c7bb;
+  border-radius: 8px;
+}
+
+.auth-modes button[aria-pressed="true"] {
+  color: #fff;
+  background: #275a4c;
+  border-color: #275a4c;
+}
+
+.field-hint {
+  margin: 8px 0 20px;
+  color: #5d6b63;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+#auth-submit {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.account-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.account-bar p {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.secondary-button {
+  flex-shrink: 0;
 }
 
 .tasks {
